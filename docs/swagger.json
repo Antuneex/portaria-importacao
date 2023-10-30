@@ -1,0 +1,211 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Portaria Importação"
+  },
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Root"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "multipart/form-data"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Root"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Root"
+            }
+          }
+        }
+      }
+    },
+    "/run-job": {
+      "get": {
+        "tags": [
+          "Job"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          }
+        }
+      }
+    },
+    "/list-drive": {
+      "post": {
+        "tags": [
+          "Drive"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "path",
+            "type": "string",
+            "value": "/Backup Diario"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Drives"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          }
+        }
+      }
+    },
+    "/upload-file": {
+      "post": {
+        "tags": [
+          "Drive"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "file",
+            "type": "file"
+          },
+          {
+            "in": "formData",
+            "name": "path",
+            "type": "string",
+            "value": "/Backup Diario"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Upload"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/DefaultError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Root": {
+      "properties": {
+        "core": {
+          "type": "string",
+          "example": "portaria-importacao"
+        },
+        "version": {
+          "type": "string",
+          "example": "v1"
+        },
+        "date": {
+          "type": "string",
+          "example": "2023-06-18T00:01:44.919Z"
+        }
+      }
+    },
+    "Job": {
+      "properties": {
+        "downloads": {
+          "type": "array",
+          "example": ["Funcionarios.csv"]
+        }
+      }
+    },
+    "Drives": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "dfc71ba1%2Daf7a%2D4b42%2D9e09%2D50d6399510ae"
+          },
+          "name": {
+            "type": "string",
+            "example": "NV I"
+          },
+          "path": {
+            "type": "string",
+            "example": "/Backup Diario/NV I"
+          },
+          "children": {
+            "type": "array",
+            "example": []
+          }
+        }
+      }
+    },
+    "Upload": {
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "File uploaded"
+        }
+      }
+    },
+    "DefaultError": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "example": 400
+        },
+        "error": {
+          "type": "string",
+          "example": "Bad Request"
+        },
+        "message": {
+          "type": "string",
+          "example": "Invalid data"
+        }
+      }
+    }
+  }
+}

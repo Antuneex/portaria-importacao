@@ -1,0 +1,56 @@
+{
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb-base",
+    "prettier",
+    "eslint:recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    },
+      "requireConfigFile": false,
+      "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    }
+  },
+  "rules": {
+    "no-console": "off",
+    "no-restricted-syntax": "off",
+    "import/no-dynamic-require": "off",
+    "global-require": "off",
+    "no-await-in-loop": "off",
+    "no-useless-catch": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
+}
